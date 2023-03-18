@@ -1,0 +1,45 @@
+{
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm-run-all build:remix build:pkg",
+    "build:remix": "remix build",
+    "build:pkg": "node ./scripts/pkg",
+    "dev": "npm-run-all build:remix --parallel \"dev:*\"",
+    "dev:node": "cross-env NODE_ENV=development nodemon --require dotenv/config ./server.js --watch ./server.js",
+    "dev:remix": "remix watch",
+    "fmt": "npm-run-all fmt:eslint fmt:pretty",
+    "fmt:eslint": "eslint --fix",
+    "fmt:pretty": "prettier --write ."
+  },
+  "dependencies": {
+    "@remix-run/express": "^1.13.0",
+    "@remix-run/node": "^1.13.0",
+    "@remix-run/react": "^1.13.0",
+    "compression": "^1.7.4",
+    "express": "^4.18.2",
+    "isbot": "^3.6.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.13.0",
+    "@remix-run/eslint-config": "^1.13.0",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.6.0",
+    "fs": "^0.0.1-security",
+    "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
+    "pkg": "^5.8.0",
+    "prettier": "^2.8.4",
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

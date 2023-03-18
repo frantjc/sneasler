@@ -1,0 +1,21 @@
+# node
+node_modules/
+
+# remix
+.cache/
+build/
+
+# dev
+.env
+
+# pkg
+pkg/
+
+# docker
+Dockerfile
+docker-compose.yml
+
+# misc
+testdata/
+*.md
+.*

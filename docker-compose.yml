@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  sneasler:
+    image: ghcr.io/frantjc/sneasler:${SNEASLER_TAG:-latest}
+    build: .
+    command: -VV
+    ports: ["8080:8080"]
+    depends_on: [minio]
+    environment:
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: &access sneasler
+      AWS_SECRET_ACCESS_KEY: *access

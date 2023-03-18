@@ -1,0 +1,29 @@
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# go
+vendor/
+
+# dev
+__debug_bin
+.env
+
+# goreleaser
+dist/
+
+# node
+node_modules/
+
+# remix
+.cache/
+build/
+
+# dev
+.env
+
+# pkg
+pkg/

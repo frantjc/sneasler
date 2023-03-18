@@ -1,0 +1,25 @@
+builds:
+  - main: ./cmd/sneasler
+    ldflags:
+      - -s -w -X github.com/frantjc/sneasler.Semver={{ .Version }}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+changelog:
+  use: github
+  filters:
+    exclude:
+      - merge conflict
+      - Merge pull request
+      - Merge remote-tracking branch
+      - Merge branch
+dockers:
+  - image_templates:
+      - ghcr.io/frantjc/sneasler:{{ .Version }}
+      - ghcr.io/frantjc/sneasler:{{ .Major }}.{{ .Minor }}
+      - ghcr.io/frantjc/sneasler:{{ .Major }}
+      - ghcr.io/frantjc/sneasler:latest
+    dockerfile: goreleaser.dockerfile
