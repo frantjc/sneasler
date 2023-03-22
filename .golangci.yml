@@ -3,7 +3,7 @@ run:
 linters:
   enable:
     - depguard
-    - dupl
+    # - dupl
     - exportloopref
     - gocyclo
     - gosec

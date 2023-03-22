@@ -8,11 +8,18 @@ import (
 
 	errorcode "github.com/frantjc/go-error-code"
 	"github.com/frantjc/sneasler/command"
+	"github.com/gin-gonic/gin"
+
+	_ "gocloud.dev/blob/azureblob"
+	_ "gocloud.dev/blob/gcsblob"
+	_ "gocloud.dev/blob/s3blob"
 )
 
 func main() {
+	gin.SetMode(gin.ReleaseMode)
+
 	var (
-		ctx, stop = signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT)
+		ctx, stop = signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 		err       error
 	)
 

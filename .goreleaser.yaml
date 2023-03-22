@@ -6,6 +6,7 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
+      - darwin
     goarch:
       - amd64
 changelog:
@@ -16,10 +17,10 @@ changelog:
       - Merge pull request
       - Merge remote-tracking branch
       - Merge branch
-dockers:
-  - image_templates:
-      - ghcr.io/frantjc/sneasler:{{ .Version }}
-      - ghcr.io/frantjc/sneasler:{{ .Major }}.{{ .Minor }}
-      - ghcr.io/frantjc/sneasler:{{ .Major }}
-      - ghcr.io/frantjc/sneasler:latest
-    dockerfile: goreleaser.dockerfile
+# dockers:
+#   - image_templates:
+#       - ghcr.io/frantjc/sneasler:{{ .Version }}
+#       - ghcr.io/frantjc/sneasler:{{ .Major }}.{{ .Minor }}
+#       - ghcr.io/frantjc/sneasler:{{ .Major }}
+#       - ghcr.io/frantjc/sneasler:latest
+#     dockerfile: goreleaser.dockerfile

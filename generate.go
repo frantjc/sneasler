@@ -1,3 +1,3 @@
 package sneasler
 
-//go:generate make fmt pb lint
+//go:generate make fmt lint tidy

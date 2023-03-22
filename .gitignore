@@ -11,6 +11,10 @@ vendor/
 # dev
 __debug_bin
 .env
+testdata/minio/*
+!testdata/minio/bucket
+testdata/minio/bucket/*
+!testdata/minio/bucket/.gitkeep
 
 # goreleaser
 dist/
@@ -21,9 +25,6 @@ node_modules/
 # remix
 .cache/
 build/
-
-# dev
-.env
 
 # pkg
 pkg/

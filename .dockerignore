@@ -5,9 +5,6 @@ node_modules/
 .cache/
 build/
 
-# dev
-.env
-
 # pkg
 pkg/
 
@@ -19,3 +16,4 @@ docker-compose.yml
 testdata/
 *.md
 .*
+!.well-known/

@@ -2,42 +2,43 @@ GO = go
 GIT = git
 GOLANGCI-LINT = golangci-lint
 GORELEASER = goreleaser
-BUF = buf
 YARN = yarn
+INSTALL = sudo install
+DOCKER = docker
+DOCKER-COMPOSE = $(DOCKER) compose
 
 BIN = /usr/local/bin
 
+GOOS = $(shell $(GO) env GOOS)
+GOARCH = $(shell $(GO) env GOARCH)
+
 SEMVER ?= 0.1.0
 
-build:
-	@$(GORELEASER) release --snapshot --rm-dist
+up:
+	@$(DOCKER-COMPOSE) $@ --build
 
 generate test:
 	@$(GO) $@ ./...
 
 fmt:
 	@$(GO) $@ ./...
-	@$(BUF) format -w
 	@$(YARN) $@
 
-download vendor verify:
+download tidy vendor verify:
 	@$(GO) mod $@
 
 lint:
 	@$(GOLANGCI-LINT) run --fix
 
 release:
+	@$(YARN) version --new-version=$(SEMVER)
 	@$(GIT) tag v$(SEMVER)
 	@$(GIT) push origin --tags
-
-pb:
-	@$(BUF) generate
 
 gen: generate
 dl: download
 ven: vendor
 ver: verify
 format: fmt
-proto protos buf: pb
 
-.PHONY: buf build dl download fmt format gen generate lint pb proto protos release test ven vendor ver verify
+.PHONY: build dl download fmt format gen generate lint release test ven vendor ver verify
