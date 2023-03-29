@@ -5,15 +5,17 @@ node_modules/
 .cache/
 build/
 
-# pkg
-pkg/
+# goreleaser
+dist/
 
 # docker
 Dockerfile
 docker-compose.yml
+*.dockerfile
 
 # misc
 testdata/
 *.md
 .*
 !.well-known/
+CODEOWNERS

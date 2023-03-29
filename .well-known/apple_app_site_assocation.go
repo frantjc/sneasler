@@ -18,7 +18,7 @@ type AppleAppSiteAssociationApps struct {
 }
 
 type AppleAppSiteAssociationAppLinks struct {
-	Apps    []string `json:"apps"`
+	AppleAppSiteAssociationApps `json:",inline"`
 	Details []AppleAppSiteAssociationAppLinksDetail `json:"details"`
 }
 

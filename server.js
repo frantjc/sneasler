@@ -2,6 +2,7 @@
 process.on("SIGINT", onSignal);
 process.on("SIGTERM", onSignal);
 
+const morgan = require("morgan");
 const path = require("path");
 const express = require("express");
 const compression = require("compression");
@@ -30,18 +31,24 @@ app.disable("x-powered-by");
 // Remix fingerprints its assets so we can cache forever.
 app.use(
   "/build",
-  express.static("public/build", { immutable: true, maxAge: "1y" })
+  express.static(path.join(__dirname, "public/build"), {
+    immutable: true,
+    maxAge: "1y",
+  })
 );
 
 // Everything else (like favicon.ico) is cached for an hour. You may want to be
 // more aggressive with this caching.
-app.use(express.static("public", { maxAge: "1h" }));
+app.use(
+  express.static(path.join(__dirname, "public"), { maxAge: "1h" }),
+  morgan("tiny")
+);
 
 app.get("/", envRemixRequestHandler);
 
 app.listen(process.env.PORT || 3000);
 
-const buildDir = path.join(process.cwd(), "./build");
+const buildDir = path.join(__dirname, "./build");
 function purgeRequireCache() {
   // Purge require cache on requests for "server side HMR" this won't let
   // you have in-memory objects between requests in development.

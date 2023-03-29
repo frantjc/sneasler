@@ -18,9 +18,9 @@ func NewHandler(alb wellknown.AssetlinksBackend, aasab wellknown.AppleAppSiteAss
 		{
 			assetlinks := v1.Group("/assetlinks")
 			{
-				assetlinks.POST("", assetlinkHandler(alb, wellknown.CreateAssetlink))
-				assetlinks.PUT("", assetlinkHandler(alb, wellknown.UpdateAssetlink))
-				assetlinks.PATCH("", assetlinkHandler(alb, wellknown.PatchAssetlink))
+				assetlinks.POST("", assetlinksHandler(alb, wellknown.CreateAssetlink))
+				assetlinks.PUT("", assetlinksHandler(alb, wellknown.UpdateAssetlink))
+				assetlinks.PATCH("", assetlinksHandler(alb, wellknown.PatchAssetlink))
 			}
 
 			appleAppSiteAssociation := v1.Group("/apple-app-site-association")
