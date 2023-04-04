@@ -75,7 +75,7 @@ func NewSneasler() *cobra.Command {
 						frontendLog    = log.WithName("frontend")
 						stdoutErr      = errors.New("stderr log")
 					)
-					
+
 					if err := rl.Close(); err != nil {
 						return err
 					}

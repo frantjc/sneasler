@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"net/http"
+	"reflect"
 
 	wellknown "github.com/frantjc/sneasler/.well-known"
 	"github.com/frantjc/sneasler/internal/openapi"
@@ -36,22 +37,7 @@ func init() {
 		},
 	}
 
-	openapi.Spec.Definitions["assetlink"] = *spec.MapProperty(&spec.Schema{
-		SchemaProps: spec.SchemaProps{
-			Properties: spec.SchemaProperties{
-				"relation": *spec.ArrayProperty(spec.StringProperty()),
-				"target": *spec.MapProperty(&spec.Schema{
-					SchemaProps: spec.SchemaProps{
-						Properties: spec.SchemaProperties{
-							"namespace":                *spec.StringProperty(),
-							"package_name":             *spec.StringProperty(),
-							"sha256_cert_fingerpritns": *spec.ArrayProperty(spec.StringProperty()),
-						},
-					},
-				}),
-			},
-		},
-	})
+	openapi.Spec.Definitions["assetlink"] = *openapi.Definition(reflect.TypeOf(&wellknown.Assetlink{}))
 }
 
 func assetlinksOperation() *spec.Operation {
@@ -60,27 +46,7 @@ func assetlinksOperation() *spec.Operation {
 			Tags: []string{
 				"assetlinks",
 			},
-			Responses: &spec.Responses{
-				ResponsesProps: spec.ResponsesProps{
-					StatusCodeResponses: map[int]spec.Response{
-						http.StatusOK: {
-							ResponseProps: spec.ResponseProps{
-								Description: http.StatusText(http.StatusOK),
-							},
-						},
-						http.StatusBadRequest: {
-							ResponseProps: spec.ResponseProps{
-								Description: http.StatusText(http.StatusBadRequest),
-							},
-						},
-						http.StatusInternalServerError: {
-							ResponseProps: spec.ResponseProps{
-								Description: http.StatusText(http.StatusInternalServerError),
-							},
-						},
-					},
-				},
-			},
+			Responses: response(http.StatusOK, http.StatusBadRequest, http.StatusInternalServerError),
 		},
 	}
 }

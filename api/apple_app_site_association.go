@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"net/http"
+	"reflect"
 
 	wellknown "github.com/frantjc/sneasler/.well-known"
 	"github.com/frantjc/sneasler/internal/openapi"
@@ -36,14 +37,7 @@ func init() {
 		},
 	}
 
-	openapi.Spec.Definitions["apple-app-site-association.applinks.detail"] = *spec.MapProperty(&spec.Schema{
-		SchemaProps: spec.SchemaProps{
-			Properties: spec.SchemaProperties{
-				"appID": *spec.StringProperty(),
-				"paths": *spec.ArrayProperty(spec.StringProperty()),
-			},
-		},
-	})
+	openapi.Spec.Definitions["apple-app-site-association.applinks.detail"] = *openapi.Definition(reflect.TypeOf(&wellknown.AppleAppSiteAssociationAppLinksDetail{}))
 }
 
 func appleAppSiteAssociationOperation() *spec.Operation {
@@ -52,27 +46,25 @@ func appleAppSiteAssociationOperation() *spec.Operation {
 			Tags: []string{
 				"apple-app-site-association",
 			},
-			Responses: &spec.Responses{
-				ResponsesProps: spec.ResponsesProps{
-					StatusCodeResponses: map[int]spec.Response{
-						http.StatusOK: {
-							ResponseProps: spec.ResponseProps{
-								Description: http.StatusText(http.StatusOK),
-							},
-						},
-						http.StatusBadRequest: {
-							ResponseProps: spec.ResponseProps{
-								Description: http.StatusText(http.StatusBadRequest),
-							},
-						},
-						http.StatusInternalServerError: {
-							ResponseProps: spec.ResponseProps{
-								Description: http.StatusText(http.StatusInternalServerError),
-							},
-						},
-					},
-				},
+			Responses: response(http.StatusOK, http.StatusBadRequest, http.StatusInternalServerError),
+		},
+	}
+}
+
+func response(httpStatusCodes ...int) *spec.Responses {
+	m := make(map[int]spec.Response, len(httpStatusCodes))
+
+	for _, httpStatusCode := range httpStatusCodes {
+		m[httpStatusCode] = spec.Response{
+			ResponseProps: spec.ResponseProps{
+				Description: http.StatusText(httpStatusCode),
 			},
+		}
+	}
+
+	return &spec.Responses{
+		ResponsesProps: spec.ResponsesProps{
+			StatusCodeResponses: m,
 		},
 	}
 }
