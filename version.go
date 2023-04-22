@@ -7,7 +7,7 @@ import (
 
 // Semver is the semantic version of sneasler.
 // Meant to be be overridden at build time.
-var Semver = "0.0.0"
+var Semver = "0.1.2"
 
 // GetSemver returns the semantic version of sneasler as built from
 // Semver and debug build info.

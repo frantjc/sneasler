@@ -27,7 +27,10 @@ func NewController() *cobra.Command {
 			SilenceErrors: true,
 			SilenceUsage:  true,
 			RunE: func(cmd *cobra.Command, args []string) error {
-				ctx := cmd.Context()
+				var (
+					ctx = cmd.Context()
+					log = sneasler.LoggerFrom(ctx)
+				)
 
 				if err := scheme.AddToScheme(schm); err != nil {
 					return err
@@ -49,6 +52,7 @@ func NewController() *cobra.Command {
 					HealthProbeBindAddress: probeAddr,
 					LeaderElection:         leaderElect,
 					LeaderElectionID:       "15aa2f8a.frantj.cc",
+					Logger:                 log,
 				})
 				if err != nil {
 					return err
@@ -57,6 +61,7 @@ func NewController() *cobra.Command {
 				if err = (&controllers.SneaslerReconciler{
 					Client: mgr.GetClient(),
 					Scheme: mgr.GetScheme(),
+					Logger: mgr.GetLogger(),
 				}).SetupWithManager(mgr); err != nil {
 					return err
 				}

@@ -3,8 +3,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: sneasler
-  namespace: default
-automountServiceAccountToken: true
+  namespace: sneasler
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -13,7 +12,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: sneasler
-    namespace: default
+    namespace: sneasler
 roleRef:
   kind: ClusterRole
   name: sneasler
@@ -23,12 +22,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: sneasler
-  namespace: default
+  namespace: sneasler
 spec:
   serviceAccountName: sneasler
   containers:
     - name: sneasler
-      image: ghcr.io/frantjc/sneasler:0.1.0
+      image: ghcr.io/frantjc/sneasler:0.1.2
       args:
         - controller
       ports:

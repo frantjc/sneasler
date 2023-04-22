@@ -32,12 +32,14 @@ import (
 	"github.com/frantjc/go-fn"
 	"github.com/frantjc/sneasler"
 	frantjcv1alpha1 "github.com/frantjc/sneasler/api/v1alpha1"
+	"github.com/go-logr/logr"
 )
 
 // SneaslerReconciler reconciles a Sneasler object.
 type SneaslerReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
+	Logger logr.Logger
 }
 
 //+kubebuilder:rbac:groups=frantj.cc,resources=sneaslers,verbs=get;list;watch;create;update;patch;delete
@@ -53,11 +55,9 @@ type SneaslerReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.14.1/pkg/reconcile
 func (r *SneaslerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	var (
-		log   = sneasler.LoggerFrom(ctx)
+		_     = r.Logger
 		snslr = &frantjcv1alpha1.Sneasler{}
 	)
-
-	log.Info("reconile", "namespacedName", req.NamespacedName)
 
 	if err := r.Client.Get(ctx, req.NamespacedName, snslr); err != nil {
 		if kerrors.IsNotFound(err) {
@@ -67,18 +67,18 @@ func (r *SneaslerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 		return ctrl.Result{}, err
 	}
 
-	log.Info("reconile", "object", snslr)
-
 	var (
 		metadata = metav1.ObjectMeta{
 			Name:      req.Name,
 			Namespace: req.Namespace,
 			OwnerReferences: []metav1.OwnerReference{
 				{
-					APIVersion: frantjcv1alpha1.GroupVersion.String(),
-					Name:       req.Name,
-					Controller: fn.Ptr(true),
-					Kind:       "Sneasler",
+					APIVersion:         frantjcv1alpha1.GroupVersion.String(),
+					Name:               req.Name,
+					BlockOwnerDeletion: fn.Ptr(true),
+					Controller:         fn.Ptr(true),
+					Kind:               "Sneasler",
+					UID:                snslr.GetUID(),
 				},
 			},
 		}
