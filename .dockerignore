@@ -13,9 +13,18 @@ Dockerfile
 docker-compose.yml
 *.dockerfile
 
+# github
+.github/
+
+# helm
+charts/
+
 # misc
+config/
+hack/
 testdata/
 *.md
 .*
 !.well-known/
 CODEOWNERS
+Makefile

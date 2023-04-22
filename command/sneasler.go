@@ -9,11 +9,9 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"strconv"
 	"strings"
 	"time"
 
@@ -140,7 +138,7 @@ func NewSneasler() *cobra.Command {
 					}
 					l = tun
 				} else {
-					p, err := net.Listen("tcp", fmt.Sprint(":", conf.Viper.GetInt64("port")))
+					p, err := net.Listen("tcp", conf.Viper.GetString("addr"))
 					if err != nil {
 						return err
 					}
@@ -257,9 +255,8 @@ func NewSneasler() *cobra.Command {
 
 	cmd.PersistentFlags().CountVarP(&verbosity, "verbose", "V", "verbosity")
 
-	cmd.Flags().Int64P("port", "p", mustParsePort(), "port")
-	_ = conf.Viper.BindPFlag("port", cmd.Flag("port"))
-	conf.Viper.MustBindEnv("port", "PORT")
+	cmd.Flags().String("addr", ":8080", "address to bind to")
+	_ = conf.Viper.BindPFlag("addr", cmd.Flag("addr"))
 
 	cmd.Flags().Bool("ngrok", false, "use ngrok")
 	_ = conf.Viper.BindPFlag("ngrok", cmd.Flag("ngrok"))
@@ -273,14 +270,7 @@ func NewSneasler() *cobra.Command {
 	_ = conf.Viper.BindPFlag("js-entrypoint", cmd.Flag("js-entrypoint"))
 	conf.Viper.MustBindEnv("js-entrypoint", "SNEASLER_JS_ENTRYPOINT")
 
+	cmd.AddCommand(NewController())
+
 	return cmd
-}
-
-func mustParsePort() int64 {
-	p, err := strconv.Atoi(os.Getenv("PORT"))
-	if p != 0 && err != nil {
-		return int64(p)
-	}
-
-	return 8080
 }

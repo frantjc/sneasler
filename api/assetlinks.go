@@ -43,10 +43,8 @@ func init() {
 func assetlinksOperation() *spec.Operation {
 	return &spec.Operation{
 		OperationProps: spec.OperationProps{
-			Tags: []string{
-				"assetlinks",
-			},
-			Responses: response(http.StatusOK, http.StatusBadRequest, http.StatusInternalServerError),
+			Tags:      []string{"assetlinks"},
+			Responses: responses(http.StatusOK, http.StatusBadRequest, http.StatusInternalServerError),
 		},
 	}
 }

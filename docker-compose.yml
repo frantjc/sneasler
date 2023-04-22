@@ -1,18 +1,18 @@
 version: "3.4"
 
 services:
-  sneasler:
-    image: ghcr.io/frantjc/sneasler:${SNEASLER_TAG:-latest}
+  sneasler: &sneasler
+    image: ghcr.io/frantjc/sneasler
     build: .
     command: -VV s3://bucket?disableSSL=true\&s3ForcePathStyle=true\&endpoint=minio:9000
-    ports: ["8080:8080"]
+    ports: ["8080:8080", "6000:6000"]
     depends_on: [minio]
     environment:
       AWS_REGION: us-east-1
       AWS_ACCESS_KEY_ID: &access sneasler
       AWS_SECRET_ACCESS_KEY: *access
   minio:
-    image: minio/minio:${MINIO_TAG:-latest}
+    image: minio/minio
     command: server /var/lib/minio --console-address ":9001"
     volumes: ["./testdata/minio:/var/lib/minio:z"]
     ports: ["9000:9000", "9001:9001"]

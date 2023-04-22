@@ -46,3 +46,7 @@ func GetSemver() string {
 
 	return version
 }
+
+func GetImageRef() string {
+	return "ghcr.io/frantjc/sneasler:" + Semver
+}

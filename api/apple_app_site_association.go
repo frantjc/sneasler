@@ -43,15 +43,13 @@ func init() {
 func appleAppSiteAssociationOperation() *spec.Operation {
 	return &spec.Operation{
 		OperationProps: spec.OperationProps{
-			Tags: []string{
-				"apple-app-site-association",
-			},
-			Responses: response(http.StatusOK, http.StatusBadRequest, http.StatusInternalServerError),
+			Tags:      []string{"apple-app-site-association"},
+			Responses: responses(http.StatusOK, http.StatusBadRequest, http.StatusInternalServerError),
 		},
 	}
 }
 
-func response(httpStatusCodes ...int) *spec.Responses {
+func responses(httpStatusCodes ...int) *spec.Responses {
 	m := make(map[int]spec.Response, len(httpStatusCodes))
 
 	for _, httpStatusCode := range httpStatusCodes {

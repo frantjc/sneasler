@@ -26,5 +26,6 @@ node_modules/
 .cache/
 build/
 
-# pkg
-pkg/
+# helm
+tmpcharts/
+charts/**/charts/
