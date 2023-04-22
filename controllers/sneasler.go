@@ -43,6 +43,8 @@ type SneaslerReconciler struct {
 //+kubebuilder:rbac:groups=frantj.cc,resources=sneaslers,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=frantj.cc,resources=sneaslers/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=frantj.cc,resources=sneaslers/finalizers,verbs=update
+//+kubebuilder:rbac:groups="",resources=events;pods;services;services/finalizers,verbs=*
+//+kubebuilder:rbac:groups=apps,resources=deployments;replicasets,verbs=*
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
@@ -51,9 +53,11 @@ type SneaslerReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.14.1/pkg/reconcile
 func (r *SneaslerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	var (
-		_     = sneasler.LoggerFrom(ctx)
+		log   = sneasler.LoggerFrom(ctx)
 		snslr = &frantjcv1alpha1.Sneasler{}
 	)
+
+	log.Info("reconile", "namespacedName", req.NamespacedName)
 
 	if err := r.Client.Get(ctx, req.NamespacedName, snslr); err != nil {
 		if kerrors.IsNotFound(err) {
@@ -62,6 +66,8 @@ func (r *SneaslerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 
 		return ctrl.Result{}, err
 	}
+
+	log.Info("reconile", "object", snslr)
 
 	var (
 		metadata = metav1.ObjectMeta{

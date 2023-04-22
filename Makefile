@@ -16,7 +16,7 @@ BIN ?= /usr/local/bin
 GOOS = $(shell $(GO) env GOOS)
 GOARCH = $(shell $(GO) env GOARCH)
 
-SEMVER ?= 0.1.0
+SEMVER ?= 0.1.1
 
 manifests:
 	@$(CONTROLLER-GEN) rbac:roleName=sneasler crd webhook paths="./..." output:dir=manifests

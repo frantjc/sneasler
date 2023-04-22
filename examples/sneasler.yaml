@@ -1,0 +1,8 @@
+---
+apiVersion: frantj.cc/v1alpha1
+kind: Sneasler
+metadata:
+  name: example
+  namespace: default
+spec:
+  foo: bar
