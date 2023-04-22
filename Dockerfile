@@ -17,6 +17,5 @@ RUN yarn build
 FROM node:19-alpine3.16
 ENTRYPOINT ["sneasler"]
 ENV SNEASLER_JS_ENTRYPOINT /app/index.js
-COPY public/ /app/public
 COPY --from=go /assets /usr/local/bin
 COPY --from=remix /src/github.com/frantjc/sneasler/dist /app

@@ -26,7 +26,6 @@ dockers:
     dockerfile: goreleaser.dockerfile
     extra_files:
       - app/
-      - public/
       - .dockerignore
       - package.json
       - remix.config.js
