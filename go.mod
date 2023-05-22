@@ -6,7 +6,7 @@ require go.uber.org/zap v1.24.0
 
 require (
 	github.com/gin-gonic/gin v1.9.0
-	github.com/go-logr/logr v1.2.3
+	github.com/go-logr/logr v1.2.4
 	github.com/logsquaredn/blobproxy v0.1.5
 	golang.ngrok.com/ngrok v1.0.0
 	k8s.io/api v0.26.3
@@ -159,7 +159,7 @@ require (
 	github.com/frantjc/go-error-code v0.2.0
 	github.com/frantjc/go-fn v0.3.0
 	github.com/frantjc/go-ingress v0.1.0
-	github.com/go-logr/zapr v1.2.3
+	github.com/go-logr/zapr v1.2.4
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.15.0
 	go.uber.org/atomic v1.10.0 // indirect
