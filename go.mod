@@ -156,7 +156,7 @@ require (
 )
 
 require (
-	github.com/frantjc/go-error-code v0.1.1
+	github.com/frantjc/go-error-code v0.2.0
 	github.com/frantjc/go-fn v0.3.0
 	github.com/frantjc/go-ingress v0.1.0
 	github.com/go-logr/zapr v1.2.3
