@@ -884,8 +884,8 @@ github.com/franela/goreq v0.0.0-20171204163338-bcd34c9993f8/go.mod h1:ZhphrRTfi2
 github.com/frankban/quicktest v1.11.3/go.mod h1:wRf/ReqHper53s+kmmSZizM8NamnL3IM0I9ntUbOk+k=
 github.com/frankban/quicktest v1.14.3 h1:FJKSZTDHjyhriyC81FLQ0LY93eSai0ZyR/ZIkd3ZUKE=
 github.com/frankban/quicktest v1.14.3/go.mod h1:mgiwOwqx65TmIk1wJ6Q7wvnVMocbUorkibMOrVTHZps=
-github.com/frantjc/go-error-code v0.1.1 h1:4LOhGDeNGwFjogH5zORHkmW64UQbQJS2qlw2NNqh4g8=
-github.com/frantjc/go-error-code v0.1.1/go.mod h1:rXcJ/EOyG7tvbGFwLYAPWgYJEOwkACqvfUanInQv2kI=
+github.com/frantjc/go-error-code v0.2.0 h1:ib+6K4CK86O01zL1+vnXgmp7bwPTPciTp/qNbqgzsUE=
+github.com/frantjc/go-error-code v0.2.0/go.mod h1:X3d/hknEeZl9ZD352/Lxhez8YZEjBriLlwB89r0aWAM=
 github.com/frantjc/go-fn v0.3.0 h1:o+MfcZlgdEFMc8DN2aYYrjycX6evl3SBR0k4UtWG/E4=
 github.com/frantjc/go-fn v0.3.0/go.mod h1:1W4VAsm6bbEaIcE9r7zYz7oUz8US+O3FVOSYORt2fB8=
 github.com/frantjc/go-ingress v0.1.0 h1:Y1HBFdc2ivg2QWQV22yOQ/8ZlIEka7X/uyGTOrAg2S4=
