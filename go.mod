@@ -7,7 +7,7 @@ require go.uber.org/zap v1.24.0
 require (
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-logr/logr v1.2.3
-	github.com/logsquaredn/blobproxy v0.1.4
+	github.com/logsquaredn/blobproxy v0.1.5
 	golang.ngrok.com/ngrok v1.0.0
 	k8s.io/api v0.26.3
 	k8s.io/apimachinery v0.26.3
