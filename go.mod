@@ -164,5 +164,5 @@ require (
 	go.uber.org/multierr v1.9.0 // indirect
 	gocloud.dev v0.29.0
 	k8s.io/client-go v0.26.3
-	k8s.io/cri-api v0.27.0
+	k8s.io/cri-api v0.27.3
 )
