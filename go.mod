@@ -163,6 +163,6 @@ require (
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	gocloud.dev v0.29.0
-	k8s.io/client-go v0.26.3
+	k8s.io/client-go v0.27.3
 	k8s.io/cri-api v0.27.3
 )
